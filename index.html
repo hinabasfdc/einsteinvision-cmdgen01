@@ -36,8 +36,12 @@
       <input id="APIUSAGE" type="text" onfocus="this.select();" />
     </li>
     <li>
-      <label>CREATE DATASET: </label>
-      <input id="CREATEDATASET" type="text" onfocus="this.select();"  />
+      <label>CREATE DATASET(IMAGE CLASSIFICATION): </label>
+      <input id="CREATEDATASET_IC" type="text" onfocus="this.select();"  />
+    </li>
+    <li>
+      <label>CREATE DATASET(IMAGE OBJECTDETECTION): </label>
+      <input id="CREATEDATASET_OD" type="text" onfocus="this.select();"  />
     </li>
     <li>
       <label>DATASET STATUS: </label>
@@ -83,7 +87,8 @@
         document.getElementById('APIUSAGE').value = 'curl -X GET -H "Authorization: Bearer ' + token + '" https://api.einstein.ai/v2/apiusage | jq';
 
         if (zipfilename) {
-          document.getElementById('CREATEDATASET').value = 'curl -X POST -H "Authorization: Bearer ' + token + '" -H "Content-Type: multipart/form-data" -F "data=@' + zipfilename + '" -F "type=image"  https://api.einstein.ai/v2/vision/datasets/upload | jq';
+          document.getElementById('CREATEDATASET_IC').value = 'curl -X POST -H "Authorization: Bearer ' + token + '" -H "Content-Type: multipart/form-data" -F "data=@' + zipfilename + '" -F "type=image"  https://api.einstein.ai/v2/vision/datasets/upload | jq';
+          document.getElementById('CREATEDATASET_OD').value = 'curl -X POST -H "Authorization: Bearer ' + token + '" -H "Content-Type: multipart/form-data" -F "data=@' + zipfilename + '" -F "type=image-detection"  https://api.einstein.ai/v2/vision/datasets/upload | jq';
 
           if(datasetid) {
             document.getElementById('DATASETSTATUS').value = 'curl -X GET -H "Authorization: Bearer ' + token + '" https://api.einstein.ai/v2/vision/datasets/' + datasetid + ' | jq';
