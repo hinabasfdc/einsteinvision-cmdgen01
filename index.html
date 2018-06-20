@@ -6,75 +6,125 @@
 
 <body>
   <h2>変数</h2>
-  <ul>
-    <li>
-      <label>TOKEN: </label>
-      <input id="TOKEN" type="text" onchange="setCom();" onfocus="this.select();" />
-    </li>
-    <li>
-      <label>ZIPFILE NAME: </label>
-      <input id="ZIPFILENAME" type="text" onchange="setCom();" onfocus="this.select();" />
-    </li>
-    <li>
-      <label>DATASET ID: </label>
-      <input id="DATASETID" type="text" onchange="setCom();" onfocus="this.select();" />
-    </li>
-    <li>
-      <label>MODEL ID: </label>
-      <input id="MODELID" type="text" onchange="setCom();" onfocus="this.select();" />
-    </li>
-    <li>
-        <label>TEST FILE NAME: </label>
+  <table>
+    <tr>
+      <td>
+        TOKEN:
+      </td>
+      <td>
+        <input id="TOKEN" type="text" onchange="setCom();" onfocus="this.select();" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        ZIPFILE NAME:
+      </td>
+      <td>
+        <input id="ZIPFILENAME" type="text" onchange="setCom();" onfocus="this.select();" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        DATASET ID:
+      </td>
+      <td>
+        <input id="DATASETID" type="text" onchange="setCom();" onfocus="this.select();" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        MODEL ID:
+      </td>
+      <td>
+        <input id="MODELID" type="text" onchange="setCom();" onfocus="this.select();" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        TEST FILE NAME:
+      </td>
+      <td>
         <input id="TESTFILENAME" type="text" onchange="setCom();" onfocus="this.select();" />
-      </li>
-  
-  </ul>
+      </td>
+    </tr>
+
+  </table>
   <h2>コマンド</h2>
-  <ul>
-    <li>
-      <label>API USAGE: </label>
-      <input id="APIUSAGE" type="text" onfocus="this.select();" />
-    </li>
-    <li>
-      <label>CREATE DATASET(IMAGE CLASSIFICATION): </label>
-      <input id="CREATEDATASET_IC" type="text" onfocus="this.select();"  />
-    </li>
-    <li>
-      <label>CREATE DATASET(IMAGE OBJECTDETECTION): </label>
-      <input id="CREATEDATASET_OD" type="text" onfocus="this.select();"  />
-    </li>
-    <li>
-      <label>DATASET STATUS: </label>
-      <input id="DATASETSTATUS" type="text" onfocus="this.select();"  />
-    </li>
-    <li>
-      <label>TRAINING: </label>
-      <input id="TRAINING" type="text" onfocus="this.select();"  />
-    </li>
-    <li>
-      <label>TRAINING STATUS: </label>
-      <input id="TRAININGSTATUS" type="text" onfocus="this.select();"  />
-    </li>
-    <li>
-        <label>PREDICTION: </label>
-        <input id="PREDICTION" type="text" onfocus="this.select();"  />
-      </li>
-    </ul>
+  <table>
+    <tr>
+      <td>
+        API USAGE:
+      </td>
+      <td>
+        <input id="APIUSAGE" type="text" onfocus="this.select();" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        CREATE DATASET
+        <br />(IMAGE CLASSIFICATION):
+      </td>
+      <td>
+        <input id="CREATEDATASET_IC" type="text" onfocus="this.select();" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        CREATE DATASET
+        <br />(OBJECT DETECTION):
+      </td>
+      <td>
+        <input id="CREATEDATASET_OD" type="text" onfocus="this.select();" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        DATASET STATUS:
+      </td>
+      <td>
+        <input id="DATASETSTATUS" type="text" onfocus="this.select();" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        TRAINING:
+      </td>
+      <td>
+        <input id="TRAINING" type="text" onfocus="this.select();" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        TRAINING STATUS:
+      </td>
+      <td>
+        <input id="TRAININGSTATUS" type="text" onfocus="this.select();" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        PREDICTION:
+      </td>
+      <td>
+        <input id="PREDICTION" type="text" onfocus="this.select();" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        DETECTION:
+      </td>
+      <td>
+        <input id="DETECTION" type="text" onfocus="this.select();" />
+      </td>
+    </tr>
+  </table>
+
   <style>
-    ul li {
-      list-style: none;
-    }
-
-    label {
-      margin-right: 12px;
-      width: 160px;
-      float: left;
-    }
-
     input {
       width: 360px;
     }
   </style>
+
   <script>
     function setCom() {
       var token = document.getElementById('TOKEN').value;
@@ -90,16 +140,17 @@
           document.getElementById('CREATEDATASET_IC').value = 'curl -X POST -H "Authorization: Bearer ' + token + '" -H "Content-Type: multipart/form-data" -F "data=@' + zipfilename + '" -F "type=image"  https://api.einstein.ai/v2/vision/datasets/upload | jq';
           document.getElementById('CREATEDATASET_OD').value = 'curl -X POST -H "Authorization: Bearer ' + token + '" -H "Content-Type: multipart/form-data" -F "data=@' + zipfilename + '" -F "type=image-detection"  https://api.einstein.ai/v2/vision/datasets/upload | jq';
 
-          if(datasetid) {
+          if (datasetid) {
             document.getElementById('DATASETSTATUS').value = 'curl -X GET -H "Authorization: Bearer ' + token + '" https://api.einstein.ai/v2/vision/datasets/' + datasetid + ' | jq';
             document.getElementById('TRAINING').value = 'curl -X POST -H "Authorization: Bearer ' + token + '" -H "Content-Type: multipart/form-data" -F "name=' + zipfilename.split('.')[0] + '" -F "datasetId=' + datasetid + '" https://api.einstein.ai/v2/vision/train | jq';
-            
-            if(modelid){
+
+            if (modelid) {
               document.getElementById('TRAININGSTATUS').value = 'curl -X GET -H "Authorization: Bearer ' + token + '" https://api.einstein.ai/v2/vision/train/' + modelid + '| jq';
 
-              if(testfilename) {
+              if (testfilename) {
                 document.getElementById('PREDICTION').value = 'curl -X POST -H "Authorization: Bearer ' + token + '" -H "Content-Type: multipart/form-data" -F "sampleContent=@' + testfilename + '" -F "modelId=' + modelid + '" https://api.einstein.ai/v2/vision/predict| jq';
-              }              
+                document.getElementById('DETECTION').value = 'curl -X POST -H "Authorization: Bearer ' + token + '" -H "Content-Type: multipart/form-data" -F "sampleContent=@' + testfilename + '" -F "modelId=' + modelid + '" https://api.einstein.ai/v2/vision/detect| jq';
+              }
             }
           }
         }
